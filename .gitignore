@@ -1,0 +1,53 @@
+# Byte-compiled files
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual environment
+.venv/
+venv/
+env/
+
+# VS Code settings (optional, if using)
+.vscode/
+
+# macOS junk
+.DS_Store
+
+# Python cache
+*.log
+*.tmp
+
+# Environment variables or secrets
+.env
+*.env
+
+# Project data
+data/
+*.sqlite3
+*.db
+
+# Cache files
+geocode_cache.json
+
+# Generated or updated client data
+clients.json
+
+# Jupyter notebooks checkpoints (if any)
+.ipynb_checkpoints/
+
+# Testing / coverage
+coverage.*
+htmlcov/
+*.cover
+.pytest_cache/
+.tox/
+.nox/
+.cache/
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+.eggs/
+
