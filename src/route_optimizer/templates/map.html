@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}Map View - Route Optimizer{% endblock %}
+
+{% block head_extra %}
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+{% endblock %}
+
+{% block content %}
+    <div id="map" style="height: 90vh;"></div>
+    <script src="/static/js/map.js"></script>
+{% endblock %}
+
+

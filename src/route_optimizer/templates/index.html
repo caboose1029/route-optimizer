@@ -1,31 +1,10 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Route Optimizer Map</title>
-    <meta charset="utf-8" />
-    <link
-        rel="stylesheet"
-        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-    />
-    <style>
-        #map {
-            height: 100vh;
-            width: 100%;
-        }
-        body {
-            margin: 0;
-        }
-    </style>
-</head>
-<body>
-	<button id="optimize-btn" style="position: absolute; z-index: 1000; top: 12px; left: 45px; padding: 10px;">
-			Optimize Route
-	</button>
-    <div id="map"></div>
+{% extends "base.html" %}
 
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script src="/static/js/map.js"></script>
+{% block title %}Home - Route Optimizer{% endblock %}
 
-</body>
-</html>
+{% block content %}
+    <h2>Welcome</h2>
+    <p>This is the route optimization tool for Jacksonville-based lawn care businesses.</p>
+    <p><a href="/map">View Map</a></p>
+{% endblock %}
 

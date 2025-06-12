@@ -8,11 +8,18 @@ from typing import List
 router = APIRouter()
 
 @router.get("/", response_class=HTMLResponse)
-async def index(request: Request):
+async def landing_page(request: Request):
     return request.app.templates.TemplateResponse("index.html", {"request": request})
 
+@router.get("/map", response_class=HTMLResponse)
+async def map_view(request: Request):
+    return request.app.templates.TemplateResponse("map.html", {"request": request})
 
-@router.get("/clients", response_model=List[Client])
+@router.get("/clients", response_class=HTMLResponse)
+async def client_view(request: Request):
+    return request.app.templates.TemplateResponse("clients.html", {"request": request})
+
+@router.get("/data", response_model=List[Client])
 async def get_clients():
     return load_clients()
 

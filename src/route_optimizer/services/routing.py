@@ -6,15 +6,15 @@ import os
 
 client = openrouteservice.Client(key=ORS_API_KEY)
 
-def get_route_geometry(coords: List[Tuple[float, float]]) -> List[List[float]]:
+def get_route_geometry(coords: List[Tuple[float | None, float | None]]) -> List[List[float]]:
     ors_coords = [(lon, lat) for lat, lon in coords]
 
-    res = client.directions(
+    response = client.directions(
         coordinates=ors_coords,
         profile="driving-car",
         format="geojson"
     )
 
-    geometry = res['features'][0]['geometry']['coordinates']
+    geometry = response['features'][0]['geometry']['coordinates']
 
     return [[lat, lon] for lon, lat in geometry]
