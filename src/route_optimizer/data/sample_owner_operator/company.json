@@ -1,0 +1,12 @@
+{
+  "id": "SampleOwnerOperator",
+  "name": "Sample Owner Operator",
+  "lat": 30.1504669,
+  "lon": -81.6645872,
+  "base_address": "13161 Silver Oak Drive, Jacksonville, FL 32223",
+  "employees": [
+    { "id": "emp_001", "name": "Alice", "role": "Field Tech" },
+    { "id": "emp_002", "name": "Bob", "role": "Team Lead" }
+  ],
+  "equipment": ["mower", "trimmer", "truck"]
+}

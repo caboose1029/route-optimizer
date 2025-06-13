@@ -1,0 +1,11 @@
+{
+  "name": "client_004",
+  "lat": 30.1479452,
+  "lon": -81.64406079999999,
+  "address": "2537 Emperor Drive, Jacksonville, FL 32223",
+  "yard_size_sqft": 2500,
+  "service_time_minutes": 40,
+  "hourly_income": 50.0,
+  "days_since_last_mow": 4,
+  "priority": 2
+}

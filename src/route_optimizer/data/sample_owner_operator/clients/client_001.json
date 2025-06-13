@@ -1,0 +1,11 @@
+{
+  "name": "client_001",
+  "lat": 30.1567254,
+  "lon": -81.6668055,
+  "address": "12902 Silver Oak Drive, Jacksonville, FL 32223",
+  "yard_size_sqft": 2200,
+  "service_time_minutes": 30,
+  "hourly_income": 50.0,
+  "days_since_last_mow": 5,
+  "priority": 2
+}

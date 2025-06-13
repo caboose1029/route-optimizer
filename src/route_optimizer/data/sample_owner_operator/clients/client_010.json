@@ -1,0 +1,11 @@
+{
+  "name": "client_010",
+  "lat": 30.1504218,
+  "lon": -81.6685774,
+  "address": "1008 Durbin Parke Drive, St. Johns, FL 32259",
+  "yard_size_sqft": 1500,
+  "service_time_minutes": 25,
+  "hourly_income": 42.0,
+  "days_since_last_mow": 2,
+  "priority": 4
+}

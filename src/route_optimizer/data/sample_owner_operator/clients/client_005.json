@@ -1,0 +1,11 @@
+{
+  "name": "client_005",
+  "lat": 30.1461919,
+  "lon": -81.64430620000002,
+  "address": "2510 Cody Drive, Jacksonville, FL 32223",
+  "yard_size_sqft": 3000,
+  "service_time_minutes": 50,
+  "hourly_income": 52.0,
+  "days_since_last_mow": 7,
+  "priority": 3
+}

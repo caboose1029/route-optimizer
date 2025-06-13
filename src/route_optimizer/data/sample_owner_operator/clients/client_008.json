@@ -1,0 +1,11 @@
+{
+  "name": "client_008",
+  "lat": 30.1140087,
+  "lon": -81.6236076,
+  "address": "388 Lolly Lane, St. Johns, FL 32259",
+  "yard_size_sqft": 3500,
+  "service_time_minutes": 60,
+  "hourly_income": 60.0,
+  "days_since_last_mow": 10,
+  "priority": 1
+}
