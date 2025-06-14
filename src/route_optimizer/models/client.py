@@ -2,6 +2,7 @@ from pydantic import BaseModel
 from typing import Optional
 
 class Client(BaseModel):
+    id: str
     name: str
     lat: Optional[float]
     lon: Optional[float]

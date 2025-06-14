@@ -1,9 +1,43 @@
 {% extends "base.html" %}
-
-{% block title %}Home - Route Optimizer{% endblock %}
+{% block title %}Clients{% endblock %}
 
 {% block content %}
-    <h2>Client List</h2>
-    <p>TODO: Client list</p>
+<div class="client-page">
+    <div class="client-list" id="client-list">
+        <!-- Cards will go here -->
+    </div>
+    <div class="client-detail" id="client-detail">
+        <p>Select a client to view details.</p>
+    </div>
+</div>
 {% endblock %}
 
+{% block head_extra %}
+<style>
+.client-page {
+    display: flex;
+    gap: 1rem;
+}
+.client-list {
+    width: 40%;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+.client-detail {
+    flex-grow: 1;
+    border-left: 1px solid #ccc;
+    padding-left: 1rem;
+}
+.client-card {
+    padding: 1rem;
+    border: 1px solid #ddd;
+    margin-bottom: 0.5rem;
+    cursor: pointer;
+    background: #f9f9f9;
+}
+.client-card:hover {
+    background: #e9f7ff;
+}
+</style>
+<script defer src="/static/js/clients.js"></script>
+{% endblock %}
