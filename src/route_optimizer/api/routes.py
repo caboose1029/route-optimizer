@@ -2,8 +2,8 @@ from fastapi import APIRouter, Request
 from fastapi.responses import HTMLResponse, JSONResponse
 from route_optimizer.models.company import Company
 from route_optimizer.services.client_manager import ClientManager
-from route_optimizer.models.client import Client
-from route_optimizer.services.routing import get_route_geometry
+from route_optimizer.services.map_manager import MapManager
+from route_optimizer.models.client import Client, ClientData
 from typing import List
 
 router = APIRouter()
@@ -20,17 +20,17 @@ async def map_view(request: Request):
 async def client_view(request: Request):
     return request.app.templates.TemplateResponse("clients.html", {"request": request})
 
-@router.get("/data", response_model=List[Client])
+@router.get("/data", response_model=List[ClientData])
 async def get_clients():
     company = Company("sample_owner_operator")
     client_manager = ClientManager(company)
-    return client_manager.load_all_clients()
+    return [client.data for client in client_manager.load_all_clients()]
 
 @router.get("/routes/geo")
 async def get_street_route():
     company = Company("sample_owner_operator")
-    client_manager = ClientManager(company)
-    clients = client_manager.load_all_clients()
-    coords = [(c.lat, c.lon) for c in clients]
-    geometry = get_route_geometry(coords)
+    clients = ClientManager(company).load_all_clients()
+    map_manager = MapManager(clients)
+    map_manager.geocode_all_clients()
+    geometry = map_manager.get_route_coordinates()
     return geometry

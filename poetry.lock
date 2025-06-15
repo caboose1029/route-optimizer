@@ -328,6 +328,22 @@ files = [
 requests = ">=2.0"
 
 [[package]]
+name = "polyline"
+version = "2.0.2"
+description = "A Python implementation of Google's Encoded Polyline Algorithm Format."
+optional = false
+python-versions = ">=3.7"
+groups = ["main"]
+files = [
+    {file = "polyline-2.0.2-py3-none-any.whl", hash = "sha256:389655c893bdabf2863c6aaa49490cf83dcdcec86ae715f67044ee98be57bef5"},
+    {file = "polyline-2.0.2.tar.gz", hash = "sha256:10541e759c5fd51f746ee304e9af94744089a4055b6257b293b3afd1df64e369"},
+]
+
+[package.extras]
+dev = ["pylint (>=3.0.3,<3.1.0)", "pytest (>=7.0,<8.0)", "pytest-cov (>=4.0,<5.0)", "sphinx (>=5.3.0,<5.4.0)", "sphinx-rtd-theme (>=1.2.0,<1.3.0)", "toml (>=0.10.2,<0.11.0)"]
+publish = ["build (>=0.8,<1.0)", "twine (>=4.0,<5.0)"]
+
+[[package]]
 name = "pydantic"
 version = "2.11.5"
 description = "Data validation using Python type hints"
@@ -595,4 +611,4 @@ standard = ["colorama (>=0.4) ; sys_platform == \"win32\"", "httptools (>=0.6.3)
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.13"
-content-hash = "1aef5a2bfe144387c60eb1e984b83599befbdc6076b3e138e603d5df9a34206f"
+content-hash = "a9be144c3545d8731177f85cdbe77b789a4e4c9a1a74bcde07ebee7d2a8f2659"

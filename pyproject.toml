@@ -12,7 +12,8 @@ dependencies = [
     "jinja2 (>=3.1.6,<4.0.0)",
     "uvicorn (>=0.34.3,<0.35.0)",
     "openrouteservice (>=2.3.3,<3.0.0)",
-    "python-dotenv (>=1.1.0,<2.0.0)"
+    "python-dotenv (>=1.1.0,<2.0.0)",
+    "polyline (>=2.0.2,<3.0.0)"
 ]
 
 [tool.poetry]

@@ -1,68 +1,42 @@
-import json
+from typing import List, Optional
+from route_optimizer.models.client import Client
 import requests
-from typing import List, Tuple, Optional
-from pathlib import Path
-from enum import Enum
-from route_optimizer.models.company import Company
-from route_optimizer.config import GOOGLE_API_KEY, DATA_PATH
-
-class CacheType(str, Enum):
-    GEOCODE = "geocode"
-    ROUTING = "routing"
+import polyline
+from route_optimizer.config import GOOGLE_API_KEY
 
 
 class MapManager:
-    
-    def __init__(self, company: Company) -> None:
-        self.company = company
-        self.base_path = company.get_path("cache")
-        self.cache_paths = self._build_paths()
+    def __init__(self, clients: List[Client]):
+        self.clients = clients
 
+    def geocode_all_clients(self) -> None:
+        for client in self.clients:
+            client.ensure_coordinates()
 
-    def _build_paths(self) -> dict:
-        return{
-            "geocode": self.base_path / "geocode_cache.json",
-            "routing": self.base_path / "routing_cache.json"
-        }
+    def get_route_coordinates(self) -> Optional[List[List[float]]]:
+        # Ensure all clients have coordinates
+        coords = [client.coordinates() for client in self.clients if client.coordinates()]
+        if len(coords) < 2:
+            return None
 
+        base_url = "https://maps.googleapis.com/maps/api/directions/json"
+        origin = f"{coords[0][0]},{coords[0][1]}" # type: ignore
+        destination = f"{coords[-1][0]},{coords[-1][1]}" # type: ignore
+        waypoints = "|".join(f"{lat},{lon}" for lat, lon in coords[1:-1]) # type: ignore
 
-    def _get_cache_path(self, cache_type: CacheType) -> Path:
-        return self.cache_paths[cache_type]
-
-
-    def load_cache(self, cache_type: CacheType) -> dict:
-        path = self._get_cache_path(cache_type)
-        if path.exists():
-            return json.loads(path.read_text())
-        return {}
-
-
-    def save_cache(self, cache_type: CacheType, cache_data: dict) -> None:
-        path = self._get_cache_path(cache_type)
-        path.write_text(json.dumps(cache_data, indent=2))
-
-    
-    def get_coordinates(self, address: str) -> Optional[Tuple[float, float]]:
-        cache = self.load_cache(CacheType.GEOCODE)
-        if address in cache:
-            print(f"[Geocode] using cached result for '{address}'")
-            return cache[address]
-        coords = self._request_geocode(address)
-        if coords:
-            cache[address] = coords
-            self.save_cache(CacheType.GEOCODE, cache)
-        return coords
-        
-        
-    def _request_geocode(self, address: str) -> Optional[Tuple[float, float]]:
         params = {
-            "address": address,
+            "origin": origin,
+            "destination": destination,
+            "waypoints": waypoints,
             "key": GOOGLE_API_KEY
         }
-        response = requests.get("https://maps.googleapis.com/maps/api/geocode/json", params=params)
+
+        response = requests.get(base_url, params=params)
         result = response.json()
-        if result["status"] == "OK":
-            location = result['results'][0]['geometry']['location']
-            return (location['lat'], location['lng'])
-        print(f"[Geocode] Failed for '{address}': {result['status']}")
-        return None
+
+        if result["status"] != "OK":
+            print("Routing error:", result.get("error_message", "Unknown error"))
+            return None
+
+        encoded_polyline = result["routes"][0]["overview_polyline"]["points"]
+        return polyline.decode(encoded_polyline)  # type: ignore

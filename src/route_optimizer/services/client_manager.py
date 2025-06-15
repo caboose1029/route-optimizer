@@ -1,3 +1,4 @@
+from http import client
 import json
 from pathlib import Path
 from typing import List, Optional
@@ -12,21 +13,20 @@ class ClientManager:
 
 
     def load_all_clients(self) -> List[Client]:
-        clients = []
-        print(self.clients_path)
-        for file in self.clients_path.glob("*.json"):
-            with open(file) as f:
-                data = json.load(f)
-                clients.append(Client(**data))
-        return clients
+        return [Client(self.company, file.stem) for file in self.clients_path.glob("*.json")]
 
     
     def load_client_by_id(self, client_id: str) -> Optional[Client]:
         file_path = self.clients_path / f"{client_id}.json"
-        if not file_path.exists():
-            return None
-        with open(file_path) as f:
-            return Client(**json.load(f))
+        return Client(self.company, client_id) if file_path.exists() else None
+
+            
+    def load_clients_by_list(self, ids: list[str]) -> List[Client]:
+        return [
+            Client(self.company, client_id)
+            for client_id in ids
+            if (client := self.load_client_by_id(client_id)) is not None
+        ]
         
         
     def client_ids(self) -> List[str]:
@@ -39,7 +39,5 @@ class ClientManager:
         return f"{next_id:05d}"
     
     
-    def save_client(self, client: Client):
-        file_path = self.clients_path / f"{client.id}.json"
-        with open(file_path, "w") as f:
-            json.dump(client.model_dump(), f, indent=2)
+    def save_client(self, client: Client) -> None:
+        client.save()
