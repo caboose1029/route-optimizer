@@ -22,14 +22,14 @@ class Client:
         self.data = self._load_data()
 
     
-    def assert_base_model(self):
+    def _assert_base_model(self):
         valid_fields = ClientData.model_fields.keys()
         cleaned = {k: v for k, v in self.data.model_dump().items() if k in valid_fields}
         self.data = ClientData(**cleaned)
         self.save()
 
         
-    def assert_valid_data(self):
+    def _assert_valid_data(self):
         self.ensure_coordinates()
 
 
@@ -102,6 +102,10 @@ class Client:
                 
         self.save()
 
-client = Client(Company("Sample Owner Operator"), "00010")
-client.assert_base_model()
-client.assert_valid_data()
+
+def main():
+    pass
+
+
+if __name__ == "__main__":
+    main()
