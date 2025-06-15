@@ -1,6 +1,5 @@
 from fastapi import APIRouter, Request
 from fastapi.responses import HTMLResponse, JSONResponse
-# from route_optimizer.services.client_data import load_clients
 from route_optimizer.models.company import Company
 from route_optimizer.services.client_manager import ClientManager
 from route_optimizer.models.client import Client
