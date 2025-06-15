@@ -15,6 +15,7 @@ class MapManager:
 
     def get_route_coordinates(self) -> Optional[List[List[float]]]:
         # Ensure all clients have coordinates
+        self.geocode_all_clients()
         coords = [client.coordinates() for client in self.clients if client.coordinates()]
         if len(coords) < 2:
             return None

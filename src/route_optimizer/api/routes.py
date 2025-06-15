@@ -7,6 +7,8 @@ from route_optimizer.models.client import Client, ClientData
 from typing import List
 
 router = APIRouter()
+company = Company("Sample Owner Operator")
+client_manager = ClientManager(company)
 
 @router.get("/", response_class=HTMLResponse)
 async def landing_page(request: Request):
@@ -22,15 +24,11 @@ async def client_view(request: Request):
 
 @router.get("/data", response_model=List[ClientData])
 async def get_clients():
-    company = Company("sample_owner_operator")
-    client_manager = ClientManager(company)
     return [client.data for client in client_manager.load_all_clients()]
 
 @router.get("/routes/geo")
 async def get_street_route():
-    company = Company("sample_owner_operator")
-    clients = ClientManager(company).load_all_clients()
+    clients = client_manager.load_all_clients()
     map_manager = MapManager(clients)
-    map_manager.geocode_all_clients()
     geometry = map_manager.get_route_coordinates()
     return geometry
