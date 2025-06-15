@@ -3,10 +3,5 @@
   "name": "Anatoli Smorin",
   "lat": 30.1137207,
   "lon": -81.62487890000001,
-  "address": "100 Bracken Court, St. Johns, FL 32259",
-  "yard_size_sqft": 2750,
-  "service_time_minutes": 45,
-  "hourly_income": 47.0,
-  "days_since_last_mow": 8,
-  "priority": 3
+  "address": "100 Bracken Court, St. Johns, FL 32259"
 }

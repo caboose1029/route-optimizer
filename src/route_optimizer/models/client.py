@@ -10,11 +10,6 @@ class ClientData(BaseModel):
     lat: Optional[float]
     lon: Optional[float]
     address: Optional[str] = None
-    yard_size_sqft: Optional[float] = None
-    service_time_minutes: Optional[int] = None
-    hourly_income: Optional[float] = None
-    days_since_last_mow: Optional[int] = None
-    priority: Optional[int] = 0
 
 
 class Client:
@@ -26,7 +21,18 @@ class Client:
         self.geocode_cache_path = company.get_path("cache") / "geocode_cache.json"
         self.data = self._load_data()
 
+    
+    def assert_base_model(self):
+        valid_fields = ClientData.model_fields.keys()
+        cleaned = {k: v for k, v in self.data.model_dump().items() if k in valid_fields}
+        self.data = ClientData(**cleaned)
+        self.save()
+
         
+    def assert_valid_data(self):
+        self.ensure_coordinates()
+
+
     def _load_data(self) -> ClientData:
         with open(self.client_path, "r") as f:
             return ClientData(**json.load(f))
@@ -95,3 +101,7 @@ class Client:
                 self._save_geocode_cache(cache)
                 
         self.save()
+
+client = Client(Company("Sample Owner Operator"), "00010")
+client.assert_base_model()
+client.assert_valid_data()
