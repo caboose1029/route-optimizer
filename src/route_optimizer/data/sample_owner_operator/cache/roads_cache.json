@@ -1,0 +1,50 @@
+{
+  "30.156725,-81.666805": {
+    "road_name": "12900-12902 Silver Oak Dr",
+    "road_id": "ChIJQ0CzVDjP5YgRev2IqqUwSIA",
+    "snapped_lat": 30.156786366846813,
+    "snapped_lon": -81.66652038403053
+  },
+  "30.150422,-81.668577": {
+    "road_name": "13099-13097 Mandarin Rd",
+    "road_id": "ChIJc21viz_P5YgRCqzW_NgC-PE",
+    "snapped_lat": 30.150054999999995,
+    "snapped_lon": -81.66891269999999
+  },
+  "30.147260,-81.666370": {
+    "road_name": "13190-13194 Mandarin Rd",
+    "road_id": "ChIJc21viz_P5YgRC6zW_NgC-PE",
+    "snapped_lat": 30.1491512,
+    "snapped_lon": -81.668976
+  },
+  "30.146192,-81.644306": {
+    "road_name": "2551-2501 Emperor Dr",
+    "road_id": "ChIJO-G1N97O5YgRRTLbc9JndDM",
+    "snapped_lat": 30.147736099999996,
+    "snapped_lon": -81.6442249
+  },
+  "30.113721,-81.624879": {
+    "road_name": "329-379 Lolly Ln",
+    "road_id": "ChIJkf8UE2fO5YgR5zGAi8RGljs",
+    "snapped_lat": 30.1138749,
+    "snapped_lon": -81.6246175
+  },
+  "30.114009,-81.623608": {
+    "road_name": "381-499 Lolly Ln",
+    "road_id": "ChIJaw_UGmfO5YgRp1W5NCvLWqk",
+    "snapped_lat": 30.113794547107915,
+    "snapped_lon": -81.62342761105835
+  },
+  "30.147945,-81.644061": {
+    "road_name": "2500-2552 Emperor Dr",
+    "road_id": "ChIJO-G1N97O5YgRRDLbc9JndDM",
+    "snapped_lat": 30.14773915477701,
+    "snapped_lon": -81.64405287205015
+  },
+  "30.113816,-81.623979": {
+    "road_name": "329-379 Lolly Ln",
+    "road_id": "ChIJkf8UE2fO5YgR5zGAi8RGljs",
+    "snapped_lat": 30.1137274,
+    "snapped_lon": -81.6244701
+  }
+}

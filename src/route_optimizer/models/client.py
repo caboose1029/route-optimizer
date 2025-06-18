@@ -7,6 +7,8 @@ class ClientData(BaseModel):
     id: Optional[str] = None
     lat: Optional[float] = None
     lon: Optional[float] = None
+    road_name: Optional[str] = None
+    road_id: Optional[str] = None
 
 
     def has_coordinates(self) -> bool:
