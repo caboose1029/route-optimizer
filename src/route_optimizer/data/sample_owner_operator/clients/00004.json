@@ -1,7 +1,9 @@
 {
-  "id": "00004",
   "name": "Sleve McDichael",
+  "address": "2537 Emperor Drive, Jacksonville, FL 32223",
+  "id": "00004",
   "lat": 30.1479452,
   "lon": -81.64406079999999,
-  "address": "2537 Emperor Drive, Jacksonville, FL 32223"
+  "road_name": null,
+  "road_id": null
 }

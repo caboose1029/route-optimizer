@@ -184,7 +184,7 @@ async def delete_client(client_id: str):
 
 
 # ============================================================================
-# GROUPING API ROUTES
+# CLIENT GROUPING API ROUTES
 # ============================================================================
 
 @router.get("/groups")
@@ -232,7 +232,7 @@ async def get_client_groups():
 
 
 # ============================================================================
-# ROUTING API ROUTES
+# MAP ROUTING API ROUTES
 # ============================================================================
 
 @router.get("/routes/geo")

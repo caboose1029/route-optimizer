@@ -1,7 +1,9 @@
 {
-  "id": "00009",
   "name": "Glenallen Mixon",
+  "address": "380 Lolly Lane, St. Johns, FL 32259",
+  "id": "00009",
   "lat": 30.1138157,
   "lon": -81.62397899999999,
-  "address": "380 Lolly Lane, St. Johns, FL 32259"
+  "road_name": null,
+  "road_id": null
 }
