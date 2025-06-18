@@ -58,5 +58,11 @@
     "road_id": "ChIJxZUXVIbO5YgRCBWPiJb6pBQ",
     "snapped_lat": 30.125421788953364,
     "snapped_lon": -81.6122643836223
+  },
+  "30.123065,-81.611292": {
+    "road_name": "1010-1000 Durbin Parke Dr",
+    "road_id": "ChIJKdybEYfO5YgRDt4twrH6ng4",
+    "snapped_lat": 30.12328855216965,
+    "snapped_lon": -81.61127561316222
   }
 }

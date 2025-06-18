@@ -1,279 +1,136 @@
 {% extends "base.html" %}
-{% block title %}Clients{% endblock %}
+{% block title %}Client Management - Route Optimizer{% endblock %}
 
 {% block head_extra %}
-<style>
-.client-page {
-    display: flex;
-    gap: 1rem;
-    height: calc(100vh - 120px);
-}
-.client-list {
-    width: 40%;
-    max-height: 100%;
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-}
-.client-list-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 0;
-    border-bottom: 1px solid #ddd;
-    margin-bottom: 1rem;
-}
-.add-client-btn {
-    background: #4CAF50;
-    color: white;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 14px;
-}
-.add-client-btn:hover {
-    background: #45a049;
-}
-.client-cards {
-    flex: 1;
-    overflow-y: auto;
-}
-.client-detail {
-    flex-grow: 1;
-    border-left: 1px solid #ccc;
-    padding-left: 1rem;
-    display: flex;
-    flex-direction: column;
-}
-.client-card {
-    padding: 1rem;
-    border: 1px solid #ddd;
-    margin-bottom: 0.5rem;
-    cursor: pointer;
-    background: #f9f9f9;
-    border-radius: 4px;
-}
-.client-card:hover {
-    background: #e9f7ff;
-}
-.client-card.selected {
-    background: #e3f2fd;
-    border-color: #2196F3;
-}
-.add-client-form {
-    background: #f0f8ff;
-    border: 2px solid #4CAF50;
-    border-radius: 4px;
-    padding: 1rem;
-    margin-bottom: 1rem;
-    display: none;
-}
-.add-client-form.active {
-    display: block;
-}
-.form-group {
-    margin-bottom: 1rem;
-}
-.form-group label {
-    display: block;
-    margin-bottom: 4px;
-    font-weight: bold;
-    color: #333;
-}
-.form-group input, .form-group select {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 14px;
-}
-.form-group input:focus {
-    outline: none;
-    border-color: #4CAF50;
-    box-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
-}
-.form-actions {
-    display: flex;
-    gap: 8px;
-    margin-top: 1rem;
-}
-.btn {
-    padding: 8px 16px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 14px;
-}
-.btn-primary {
-    background: #4CAF50;
-    color: white;
-}
-.btn-primary:hover {
-    background: #45a049;
-}
-.btn-primary:disabled {
-    background: #ccc;
-    cursor: not-allowed;
-}
-.btn-secondary {
-    background: #f44336;
-    color: white;
-}
-.btn-secondary:hover {
-    background: #da190b;
-}
-.client-detail-content {
-    flex: 1;
-}
-.status-indicator {
-    padding: 4px 8px;
-    border-radius: 4px;
-    font-size: 12px;
-    margin-top: 1rem;
-}
-.status-success {
-    background: #e8f5e8;
-    color: #2e7d32;
-    border: 1px solid #c8e6c9;
-}
-.status-error {
-    background: #ffebee;
-    color: #c62828;
-    border: 1px solid #ffcdd2;
-}
-.status-pending {
-    background: #fff8e1;
-    color: #f57c00;
-    border: 1px solid #ffecb3;
-}
-
-/* Delete Confirmation Modal Styles */
-.delete-confirmation-modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1000;
-}
-
-.modal-overlay {
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.modal-content {
-    background: white;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-    max-width: 400px;
-    width: 90%;
-    text-align: center;
-}
-
-.modal-content h3 {
-    margin-top: 0;
-    color: #333;
-}
-
-.modal-actions {
-    display: flex;
-    gap: 12px;
-    justify-content: center;
-    margin-top: 1.5rem;
-}
-
-.btn-danger {
-    background: #f44336;
-    color: white;
-}
-
-.btn-danger:hover:not(:disabled) {
-    background: #da190b;
-}
-
-.btn-danger:disabled {
-    background: #ccc;
-    cursor: not-allowed;
-}
-</style>
 <script src="https://maps.googleapis.com/maps/api/js?key={{ google_api_key }}&libraries=places" defer></script>
 <script defer src="/static/js/client-management.js"></script>
 {% endblock %}
 
 {% block content %}
-<div class="client-page">
-    <div class="client-list">
-        <div class="client-list-header">
-            <h3>Clients</h3>
-            <button class="add-client-btn" id="add-client-btn">+ Add Client</button>
+<div class="h-full flex flex-col">
+    <!-- Page Header -->
+    <div class="page-header">
+        <div>
+            <h2 class="page-title">Client Management</h2>
+            <p class="text-muted">Manage your customer database and locations</p>
         </div>
-        
-        <!-- Add Client Form -->
-        <div class="add-client-form" id="add-client-form">
-            <h4>Add New Client</h4>
-            <form id="client-form">
-                <div class="form-group">
-                    <label for="client-name">Name *</label>
-                    <input type="text" id="client-name" name="name" required>
+        <button class="btn-primary btn-lg" id="add-client-btn">
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+            </svg>
+            Add Client
+        </button>
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="flex-1 flex gap-6 min-h-0">
+        <!-- Left Sidebar - Client List -->
+        <div class="sidebar">
+            <!-- Add Client Form (Hidden by default) -->
+            <div class="card mb-6 hidden" id="add-client-form">
+                <div class="card-header">
+                    <h3 class="section-title mb-0" id="form-title">Add New Client</h3>
                 </div>
-                
-                <div class="form-group">
-                    <label for="client-address">Address *</label>
-                    <input type="text" id="client-address" name="address" required 
-                           placeholder="Start typing address...">
+                <div class="card-body">
+                    <form id="client-form" class="space-y-4">
+                        <div class="form-group">
+                            <label for="client-name" class="form-label">
+                                Client Name *
+                            </label>
+                            <input type="text" id="client-name" name="name" class="form-input" required 
+                                   placeholder="Enter client name">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="client-address" class="form-label">
+                                Address *
+                            </label>
+                            <input type="text" id="client-address" name="address" class="form-input" required 
+                                   placeholder="Start typing address...">
+                            <p class="text-xs text-muted mt-1">Select from dropdown suggestions</p>
+                        </div>
+                        
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="form-group">
+                                <label for="client-type" class="form-label">Service Type</label>
+                                <select id="client-type" name="type" class="form-select">
+                                    <option value="">Select type...</option>
+                                    <option value="Residential">Residential</option>
+                                    <option value="Commercial">Commercial</option>
+                                    <option value="Multi-family">Multi-family</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="client-priority" class="form-label">Priority</label>
+                                <select id="client-priority" name="priority" class="form-select">
+                                    <option value="">Select priority...</option>
+                                    <option value="Low">Low</option>
+                                    <option value="Normal">Normal</option>
+                                    <option value="High">High</option>
+                                    <option value="Urgent">Urgent</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <!-- Status Indicator -->
+                        <div id="geocoding-status" class="hidden"></div>
+                        
+                        <!-- Form Actions -->
+                        <div class="flex gap-3 pt-4">
+                            <button type="submit" class="btn-primary" id="save-client-btn" disabled>
+                                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                Save Client
+                            </button>
+                            <button type="button" class="btn-secondary" id="cancel-client-btn">
+                                Cancel
+                            </button>
+                        </div>
+                    </form>
                 </div>
-                
-                <div class="form-group">
-                    <label for="client-type">Service Type</label>
-                    <select id="client-type" name="type">
-                        <option value="">Select type...</option>
-                        <option value="Residential">Residential</option>
-                        <option value="Commercial">Commercial</option>
-                        <option value="Multi-family">Multi-family</option>
-                    </select>
+            </div>
+
+            <!-- Client List -->
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="section-title mb-0">Clients</h3>
                 </div>
-                
-                <div class="form-group">
-                    <label for="client-priority">Priority</label>
-                    <select id="client-priority" name="priority">
-                        <option value="">Select priority...</option>
-                        <option value="Low">Low</option>
-                        <option value="Normal">Normal</option>
-                        <option value="High">High</option>
-                        <option value="Urgent">Urgent</option>
-                    </select>
+                <div class="card-body p-0">
+                    <div class="max-h-96 overflow-y-auto" id="client-list">
+                        <!-- Loading state -->
+                        <div class="p-6 text-center text-muted">
+                            <div class="loading-spinner mx-auto mb-2"></div>
+                            Loading clients...
+                        </div>
+                    </div>
                 </div>
-                
-                <div class="status-indicator" id="geocoding-status" style="display: none;"></div>
-                
-                <div class="form-actions">
-                    <button type="submit" class="btn btn-primary" id="save-client-btn" disabled>
-                        Save Client
-                    </button>
-                    <button type="button" class="btn btn-secondary" id="cancel-client-btn">
-                        Cancel
-                    </button>
-                </div>
-            </form>
+            </div>
         </div>
-        
-        <!-- Client Cards Container -->
-        <div class="client-cards" id="client-list">
-            <!-- Cards will be populated by JavaScript -->
+
+        <!-- Main Content - Client Details -->
+        <div class="main-content">
+            <div class="card h-full">
+                <div class="card-body h-full flex flex-col" id="client-detail">
+                    <!-- Default state -->
+                    <div class="flex-1 flex items-center justify-center">
+                        <div class="text-center">
+                            <svg class="w-16 h-16 text-gray-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"></path>
+                            </svg>
+                            <h3 class="text-lg font-medium text-gray-900 mb-2">Select a Client</h3>
+                            <p class="text-muted max-w-sm">Choose a client from the list to view details and manage their information, or add a new client to get started.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    
-    <div class="client-detail" id="client-detail">
-        <div class="client-detail-content">
-            <p>Select a client to view details, or add a new client to get started.</p>
-        </div>
-    </div>
+</div>
+
+<!-- Toast Notifications Container -->
+<div id="toast-container" class="fixed top-4 right-4 z-50 space-y-2">
+    <!-- Toasts will be inserted here by JavaScript -->
 </div>
 {% endblock %}

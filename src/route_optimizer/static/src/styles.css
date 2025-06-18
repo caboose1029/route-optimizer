@@ -3,7 +3,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Custom component classes */
+/* Custom component classes using @layer */
 @layer components {
   /* Button Components */
   .btn {
@@ -26,77 +26,163 @@
     @apply px-2 py-1 text-xs;
   }
   
+  .btn-lg {
+    @apply px-6 py-3 text-base;
+  }
+  
   /* Form Components */
   .form-input {
-    @apply block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm;
+    @apply block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm transition-colors;
   }
   
   .form-select {
-    @apply block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm;
+    @apply block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm transition-colors;
   }
   
   .form-label {
     @apply block text-sm font-medium text-gray-700 mb-1;
   }
   
+  .form-group {
+    @apply mb-4;
+  }
+  
+  .form-error {
+    @apply mt-1 text-sm text-danger-600;
+  }
+  
   /* Card Components */
   .card {
-    @apply bg-white rounded-lg shadow-sm border border-gray-200;
+    @apply bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden;
   }
   
   .card-header {
-    @apply px-6 py-4 border-b border-gray-200;
+    @apply px-6 py-4 border-b border-gray-200 bg-gray-50;
   }
   
   .card-body {
     @apply px-6 py-4;
   }
   
-  /* Status Components */
+  .card-footer {
+    @apply px-6 py-4 border-t border-gray-200 bg-gray-50;
+  }
+  
+  /* Status/Alert Components */
+  .alert {
+    @apply px-4 py-3 rounded-md text-sm border;
+  }
+  
+  .alert-success {
+    @apply alert bg-success-50 text-success-800 border-success-200;
+  }
+  
+  .alert-error {
+    @apply alert bg-danger-50 text-danger-800 border-danger-200;
+  }
+  
+  .alert-warning {
+    @apply alert bg-yellow-50 text-yellow-800 border-yellow-200;
+  }
+  
+  .alert-info {
+    @apply alert bg-blue-50 text-blue-800 border-blue-200;
+  }
+  
+  /* Status Indicators (smaller than alerts) */
   .status-indicator {
-    @apply px-3 py-2 text-sm rounded-md;
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
   }
   
   .status-success {
-    @apply bg-success-50 text-success-800 border border-success-200;
+    @apply status-indicator bg-success-100 text-success-800;
   }
   
   .status-error {
-    @apply bg-danger-50 text-danger-800 border border-danger-200;
+    @apply status-indicator bg-danger-100 text-danger-800;
   }
   
   .status-warning {
-    @apply bg-yellow-50 text-yellow-800 border border-yellow-200;
+    @apply status-indicator bg-yellow-100 text-yellow-800;
   }
   
-  .status-info {
-    @apply bg-blue-50 text-blue-800 border border-blue-200;
+  .status-pending {
+    @apply status-indicator bg-gray-100 text-gray-800;
   }
   
-  /* Client Management Specific */
+  /* Client Management Specific Components */
   .client-card {
-    @apply card p-4 cursor-pointer transition-all duration-200 hover:shadow-md hover:border-gray-300;
+    @apply card cursor-pointer transition-all duration-200 hover:shadow-md hover:border-gray-300 hover:scale-[1.02];
+  }
+  
+  .client-card-content {
+    @apply p-4;
   }
   
   .client-card.selected {
-    @apply border-primary-500 bg-primary-50;
+    @apply border-primary-500 bg-primary-50 shadow-md;
+  }
+  
+  .client-list-container {
+    @apply space-y-3;
   }
   
   .client-detail-section {
     @apply space-y-4;
   }
   
-  /* Modal Components */
-  .modal-overlay {
-    @apply fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50;
+  .client-detail-header {
+    @apply flex justify-between items-start mb-6;
   }
   
-  .modal-content {
-    @apply bg-white rounded-lg shadow-xl max-w-md w-full mx-4 animate-fade-in;
+  .client-detail-actions {
+    @apply flex gap-2;
+  }
+  
+  /* Layout Components */
+  .page-header {
+    @apply flex justify-between items-center mb-6;
+  }
+  
+  .page-title {
+    @apply text-2xl font-semibold text-gray-900;
+  }
+  
+  .section-title {
+    @apply text-lg font-medium text-gray-900 mb-3;
+  }
+  
+  .two-column-layout {
+    @apply grid grid-cols-1 lg:grid-cols-2 gap-6;
+  }
+  
+  .sidebar-layout {
+    @apply flex gap-6;
+  }
+  
+  .sidebar {
+    @apply w-80 flex-shrink-0;
+  }
+  
+  .main-content {
+    @apply flex-1 min-w-0;
+  }
+  
+  /* Modal Components */
+  .modal-overlay {
+    @apply fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 animate-fade-in;
+  }
+  
+  .modal {
+    @apply bg-white rounded-lg shadow-xl max-w-md w-full mx-4 animate-slide-in;
   }
   
   .modal-header {
     @apply px-6 py-4 border-b border-gray-200;
+  }
+  
+  .modal-title {
+    @apply text-lg font-medium text-gray-900;
   }
   
   .modal-body {
@@ -104,6 +190,32 @@
   }
   
   .modal-footer {
-    @apply px-6 py-4 border-t border-gray-200 flex justify-end space-x-3;
+    @apply px-6 py-4 border-t border-gray-200 flex justify-end gap-3;
+  }
+  
+  /* Navigation Components */
+  .nav-link {
+    @apply text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium transition-colors rounded-md hover:bg-gray-100;
+  }
+  
+  .nav-link.active {
+    @apply text-primary-600 bg-primary-50;
+  }
+  
+  /* Utility Classes for Common Patterns */
+  .text-muted {
+    @apply text-gray-500;
+  }
+  
+  .text-emphasis {
+    @apply text-gray-900 font-medium;
+  }
+  
+  .divider {
+    @apply border-t border-gray-200 my-4;
+  }
+  
+  .loading-spinner {
+    @apply animate-spin rounded-full h-4 w-4 border-b-2 border-primary-500;
   }
 }
