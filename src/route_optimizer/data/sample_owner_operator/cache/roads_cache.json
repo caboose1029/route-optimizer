@@ -46,5 +46,17 @@
     "road_id": "ChIJkf8UE2fO5YgR5zGAi8RGljs",
     "snapped_lat": 30.1137274,
     "snapped_lon": -81.6244701
+  },
+  "30.115131,-81.623570": {
+    "road_name": "299-201 Canton Ct",
+    "road_id": "ChIJydXoF2fO5YgR2DJVCtz7Now",
+    "snapped_lat": 30.114971684760736,
+    "snapped_lon": -81.62335837917476
+  },
+  "30.125530,-81.612026": {
+    "road_name": "400-450 Crescent Pond Dr",
+    "road_id": "ChIJxZUXVIbO5YgRCBWPiJb6pBQ",
+    "snapped_lat": 30.125421788953364,
+    "snapped_lon": -81.6122643836223
   }
 }
