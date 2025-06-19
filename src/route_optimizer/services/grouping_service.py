@@ -84,67 +84,41 @@ class GoogleRoadsGroupingService(ClientGroupingService):
         return f"{lat:.6f},{lon:.6f}"
     
     def _call_roads_api(self, coordinates: List[Tuple[float, float]]) -> Dict[str, dict]:
-        """Call Google Roads API to get road information"""
-        # Convert coordinates to path parameter (lat,lng|lat,lng|...)
-        path = "|".join([f"{lat},{lon}" for lat, lon in coordinates])
+        """Use reverse geocoding to get road names (better for individual addresses)"""
+        road_data = {}
+        geocode_url = "https://maps.googleapis.com/maps/api/geocode/json"
         
-        params = {
-            "path": path,
-            "interpolate": "true",
-            "key": self.api_key
-        }
-        
-        print(f"Debug: Calling Roads API with {len(coordinates)} coordinates")
-        
-        try:
-            response = requests.get(self.base_url, params=params, timeout=10)
-            response.raise_for_status()
-            
-            result = response.json()
-            
-            if "snappedPoints" not in result:
-                raise RoadDataError("No road data returned from API")
-            
-            print(f"Debug: Got {len(result['snappedPoints'])} snapped points")
-            
-            # Extract place IDs and get road names
-            place_ids = []
-            point_mapping = {}
-            
-            for i, point in enumerate(result["snappedPoints"]):
-                if "originalIndex" in point and point["originalIndex"] < len(coordinates):
-                    place_id = point.get("placeId")
-                    if place_id:
-                        place_ids.append(place_id)
-                        original_coord = coordinates[point["originalIndex"]]
-                        cache_key = self._cache_key(original_coord[0], original_coord[1])
-                        point_mapping[place_id] = {
-                            "cache_key": cache_key,
-                            "snapped_lat": point["location"]["latitude"],
-                            "snapped_lon": point["location"]["longitude"]
-                        }
-            
-            # Get road names from Places API
-            road_names = self._get_road_names_from_place_ids(place_ids)
-            
-            # Build final road data
-            road_data = {}
-            for place_id, mapping in point_mapping.items():
-                road_data[mapping["cache_key"]] = {
-                    "road_name": road_names.get(place_id, "Unknown Road"),
-                    "road_id": place_id,
-                    "snapped_lat": mapping["snapped_lat"],
-                    "snapped_lon": mapping["snapped_lon"]
+        for lat, lon in coordinates:
+            try:
+                params = {
+                    "latlng": f"{lat},{lon}",
+                    "result_type": "street_address|route",
+                    "key": self.api_key
                 }
-            
-            print(f"Debug: Final road_data with {len(road_data)} entries")
-            return road_data
-            
-        except requests.RequestException as e:
-            raise RoadDataError(f"Roads API request failed: {e}")
-        except KeyError as e:
-            raise RoadDataError(f"Unexpected API response format: {e}")
-    
+                
+                response = requests.get(geocode_url, params=params, timeout=5)
+                response.raise_for_status()
+                result = response.json()
+                
+                if result.get("status") == "OK" and result.get("results"):
+                    # Get the road name from address components
+                    for component in result["results"][0].get("address_components", []):
+                        if "route" in component.get("types", []):
+                            cache_key = self._cache_key(lat, lon)
+                            road_data[cache_key] = {
+                                "road_name": component.get("long_name", "Unknown Road"),
+                                "road_id": result["results"][0].get("place_id", ""),
+                                "snapped_lat": lat,
+                                "snapped_lon": lon
+                            }
+                            break
+                            
+            except Exception as e:
+                print(f"Debug: Geocoding failed for {lat},{lon}: {e}")
+                continue
+        
+        return road_data
+
     def _get_road_names_from_place_ids(self, place_ids: List[str]) -> Dict[str, str]:
         """Get road names from place IDs using Places API"""
         if not place_ids:

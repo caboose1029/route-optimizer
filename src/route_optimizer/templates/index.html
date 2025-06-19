@@ -3,8 +3,127 @@
 {% block title %}Home - Route Optimizer{% endblock %}
 
 {% block content %}
-    <h2>Welcome</h2>
-    <p>This is the route optimization tool for Jacksonville-based lawn care businesses.</p>
-    <p><a href="/map">View Map</a></p>
-{% endblock %}
+<div class="max-w-4xl mx-auto">
+    <!-- Hero Section -->
+    <div class="text-center mb-16">
+        <h1 class="text-4xl font-bold text-gray-900 mb-4">
+            Welcome to Route Optimizer
+        </h1>
+        <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+            Streamline your lawn care business with intelligent route planning, 
+            client management, and scheduling tools designed for professionals.
+        </p>
+    </div>
 
+    <!-- Quick Actions -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+        
+        <!-- Map Button -->
+        <a href="/map" class="btn-primary btn-lg flex flex-col items-center p-6 text-center">
+            <svg class="w-8 h-8 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                      d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7">
+                </path>
+            </svg>
+            <span class="text-lg font-semibold">View Map</span>
+            <span class="text-sm opacity-90 mt-1">Visualize routes and client locations</span>
+        </a>
+
+        <!-- Clients Button -->
+        <a href="/clients" class="btn-secondary btn-lg flex flex-col items-center p-6 text-center">
+            <svg class="w-8 h-8 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                      d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z">
+                </path>
+            </svg>
+            <span class="text-lg font-semibold">Manage Clients</span>
+            <span class="text-sm opacity-90 mt-1">Add, edit, and organize your customers</span>
+        </a>
+
+        <!-- Coming Soon Button (Placeholder) -->
+        <div class="btn-secondary btn-lg flex flex-col items-center p-6 text-center opacity-50 cursor-not-allowed">
+            <svg class="w-8 h-8 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                      d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
+                </path>
+            </svg>
+            <span class="text-lg font-semibold">Schedule Routes</span>
+            <span class="text-sm opacity-90 mt-1">Coming soon...</span>
+        </div>
+    </div>
+
+    <!-- Feature Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+        
+        <!-- Current Features -->
+        <div class="card">
+            <div class="card-header">
+                <h3 class="section-title mb-0">Current Features</h3>
+            </div>
+            <div class="card-body">
+                <ul class="space-y-3">
+                    <li class="flex items-center">
+                        <svg class="w-5 h-5 text-success-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                        </svg>
+                        <span>Client Management with Google Places integration</span>
+                    </li>
+                    <li class="flex items-center">
+                        <svg class="w-5 h-5 text-success-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                        </svg>
+                        <span>Interactive mapping with client locations</span>
+                    </li>
+                    <li class="flex items-center">
+                        <svg class="w-5 h-5 text-success-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                        </svg>
+                        <span>Smart client grouping by proximity</span>
+                    </li>
+                    <li class="flex items-center">
+                        <svg class="w-5 h-5 text-success-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                        </svg>
+                        <span>Route visualization and optimization</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Coming Soon -->
+        <div class="card">
+            <div class="card-header">
+                <h3 class="section-title mb-0">Coming Soon</h3>
+            </div>
+            <div class="card-body">
+                <ul class="space-y-3">
+                    <li class="flex items-center text-gray-500">
+                        <svg class="w-5 h-5 text-gray-400 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
+                        </svg>
+                        <span>Daily route scheduling</span>
+                    </li>
+                    <li class="flex items-center text-gray-500">
+                        <svg class="w-5 h-5 text-gray-400 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
+                        </svg>
+                        <span>Bulk client import from Excel</span>
+                    </li>
+                    <li class="flex items-center text-gray-500">
+                        <svg class="w-5 h-5 text-gray-400 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
+                        </svg>
+                        <span>Weather integration</span>
+                    </li>
+                    <li class="flex items-center text-gray-500">
+                        <svg class="w-5 h-5 text-gray-400 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
+                        </svg>
+                        <span>Business analytics dashboard</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
