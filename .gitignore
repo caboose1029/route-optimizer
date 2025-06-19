@@ -50,4 +50,7 @@ build/
 dist/
 *.egg-info/
 .eggs/
-
+node_modules
+src/route_optimizer/static/css/tailwind.css
+package-lock.json
+*.log
